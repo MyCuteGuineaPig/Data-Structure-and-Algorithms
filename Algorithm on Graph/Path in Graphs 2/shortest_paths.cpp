@@ -6,7 +6,32 @@
 #include <stack>
 using namespace std;
 
+/*
+5 7
+1 2 10
+2 3 5
+1 3 100
+3 5 7
+5 4 10
+4 3 -18
+5 1 -1
+1
 
+shoud return
+-
+-
+-
+-
+-
+
+instead of
+0
+10
+-
+-
+-
+
+*/
 struct pt {
 	long long num;
 	bool infinit;
@@ -23,52 +48,6 @@ void explore(vector<vector<long long> > &adj, vector<long long>&visited, vector<
 			explore(adj, visited, reachable, adj[node][i]);
 }
 
-//void shortest_paths(vector<vector<long long> > &adj, vector<vector<long long> > &cost, 
-//	long long s, vector<long long> &distance, vector<long long> &reachable, vector<long long> &shortest) {
-//	
-//	//stack<long long>order;
-//	//DFS(adj, order);
-//	//DFS_SSC(adj_rev, order, s, reachable);
-//	vector<long long>visited(adj.size(), 0);
-//	explore(adj, visited, reachable, s);
-//	distance[s] = 0;
-//
-//	vector<long long>parent(adj.size(), -1);
-//	//for (long long i = 0; i < reachable.size(); i++) {
-//	//	cout << "reachable "<< reachable[i] << endl;
-//	//}
-//	for (long long count = 1; count <= 3*adj.size(); count++) {
-//		for (long long i = 0; i < adj.size(); i++) {
-//			for (long long j = 0; j < adj[i].size(); j++) {
-//				long long end = adj[i][j];
-//				long long new_dist = distance[i] + cost[i][j];
-//				if ( reachable[i] && distance[i] < numeric_limits<long long>::max()
-//					&& distance[end] > new_dist)
-//				{
-//					if ((distance[i] >= 0 && cost[i][j] >= 0 && new_dist >= distance[i] && new_dist >= cost[i][j]) ||
-//						(distance[i] <= 0 && cost[i][j] <= 0 && new_dist <= distance[i] && new_dist <= cost[i][j]) ||
-//						(distance[i]>0 && cost[i][j] < 0) || (distance[i] < 0 && cost[i][j] > 0))
-//					{
-//					
-//						parent[end] = i;
-//						distance[end] = new_dist;
-//						if (count >= adj.size()) {
-//							//cout << "find loop " << endl;
-//							shortest[end] = 0;
-//							//long long start = end;
-//							//do {
-//							//	shortest[end] = 0;
-//							//	end = parent[end];
-//							//} while (end != start);
-//						}
-//					}
-//
-//				}
-//			}
-//		}
-//	}
-//	//write your code here
-//}
 
 bool check_overflow(long long A, long long B) {
 	long long max = std::numeric_limits<long long>::max();
