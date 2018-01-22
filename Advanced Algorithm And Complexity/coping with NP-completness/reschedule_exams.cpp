@@ -52,24 +52,15 @@ public:
 		this->numClauses = numClauses;
 		graph.resize(numVertex * 6, vector<long long>());
 
-<<<<<<< HEAD
 		low.resize(numVertex * 6, -1);
 		disc.resize(numVertex * 6, -1);
 		stackMember.resize(numVertex * 6, false);
 		result.resize(numVertex * 3, 0);
 		times = 0;
-=======
-		low.resize(numVertex * 6, -1);
-		disc.resize(numVertex * 6, -1);
-		stackMember.resize(numVertex * 6, false);
-		result.resize(numVertex * 3, 0);
-		times = 0;
->>>>>>> c1f6b22468b5413173b0e8e3fa33c0e3e608d213
 		unsatisfiable = false;
 	}
 
 
-<<<<<<< HEAD
 	void findscc(long long u) {
 		times++;
 		low[u] = times;
@@ -110,55 +101,12 @@ public:
 			}
 		}
 
-=======
-	void findscc(long long u) {
-		times++;
-		low[u] = times;
-		disc[u] = times;
-		stackMember[u] = true;
-		st.push(u);
-		for (long long i = 0; i < graph[u].size(); i++) {
-			if (disc[graph[u][i]] == -1) {
-				findscc(graph[u][i]);
-				low[u] = min(low[u], low[graph[u][i]]);
-			}
-			else if (stackMember[graph[u][i]]) {
-				low[u] = min(low[u], disc[graph[u][i]]);
-			}
-		}
-		if (low[u] == disc[u]) {
-			unordered_set<long long>sccnow;
-			//cout << "scc ";
-			while (st.top() != u) {
-				stackMember[st.top()] = false;
-				//cout << st.top()<<" ";
-				sccnow.insert(st.top());
-				st.pop();
-			}
-			stackMember[st.top()] = false;
-			//cout << st.top() << " ";
-			sccnow.insert(st.top());
-			st.pop();
-			scc.push_back(sccnow);
-			//cout << endl;
-			for (auto it : sccnow) {
-				long long val = (it);
-				if (sccnow.count(val + numVertex)>0 && sccnow.count(val - numVertex)>0)
-				{
-					unsatisfiable = true;
-					break;
-				}
-			}
-		}
-
->>>>>>> c1f6b22468b5413173b0e8e3fa33c0e3e608d213
 	}
 
 
 	bool assign_new_colors() {
 
 
-<<<<<<< HEAD
 		for (long long i = 0; i < 6 * numVertex; i++) {
 			if (disc[i] == -1)
 				findscc(i);
@@ -229,78 +177,6 @@ public:
 		}
 
 
-=======
-		for (long long i = 0; i < 6 * numVertex; i++) {
-			if (disc[i] == -1)
-				findscc(i);
-			if (unsatisfiable == true)
-				return false;
-		}
-
-
-		for (long long j = 0; j < scc.size(); j++) {
-			bool isnegative = false;
-			//cout << "scc ";
-			for (auto i : scc[j]) {
-				//cout <<i<<" ";
-				long long reminder = i%numVertex;
-				long long  divid = i / (numVertex * 2);
-				long long  var = divid*numVertex + reminder;
-				if (result[var] != 0) {
-					//cout << " var " << var  ;
-					isnegative = (result[var] == -1) ? true : false;
-					//cout << "  isnegative " << isnegative << endl;
-					break;
-				}
-			}
-			//cout << endl;
-			for (auto i : scc[j]) {
-				long long reminder = i%numVertex;
-				long long  divid = i / (numVertex * 2);
-				long long  var = divid*numVertex + reminder;
-				long long orig = i / numVertex;
-				if (result[var] == 0 && isnegative) {
-					result[var] = orig & 1 ? 1 : -1;
-					//cout << "assign var negative " << " result[" << var << "] = " << result[var] << endl;
-				}
-				else if (result[var] == 0) {
-					result[var] = orig & 1 ? -1 : 1;
-					//cout << "assign var positive "<< " result[" << var << "] = " << result[var] << endl;
-				}
-
-			}
-		}
-
-		for (long long i = 0; i < numVertex; i++) {
-			//cout << "result i "<<i<<" " << result[i] << " " << result[numVertex + i] << " " << result[2*numVertex + i] << endl;
-			if (result[i] == 1 && colors[i] != 'R') {
-				new_colors += "R";
-			}
-			else if (result[numVertex + i] == 1 && colors[i] != 'G') {
-				new_colors += "G";
-			}
-			else if (result[2 * numVertex + i] == 1 && colors[i] != 'B') {
-				new_colors += "B";
-			}
-			else {
-				if (colors[i] != 'R')
-				{
-					new_colors += "R";
-				}
-				else if (colors[i] != 'G')
-				{
-					new_colors += "G";
-				}
-				else
-				{
-					new_colors += "B";
-				}
-			}
-
-		}
-
-
->>>>>>> c1f6b22468b5413173b0e8e3fa33c0e3e608d213
 		return true;
 	}
 

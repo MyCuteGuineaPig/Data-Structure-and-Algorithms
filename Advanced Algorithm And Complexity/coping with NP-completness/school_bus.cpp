@@ -22,7 +22,6 @@ Matrix read_data() {
 	return graph;
 }
 
-<<<<<<< HEAD
 void CombinationUtil(vector<long long>arr, vector<long long>data, long long start, long long index, long long r, vector<vector<long long>>&subset) {
 	if (index == r)
 	{
@@ -35,20 +34,6 @@ void CombinationUtil(vector<long long>arr, vector<long long>data, long long star
 		data[index] = arr[i];
 		CombinationUtil(arr, data, i + 1, index + 1, r, subset);
 	}
-=======
-void CombinationUtil(vector<long long>arr, vector<long long>data, long long start, long long index, long long r, vector<vector<long long>>&subset) {
-	if (index == r)
-	{
-		subset.push_back(data);
-		return;
-	}
-
-	for (long long i = start; i < arr.size() && arr.size() - i >= r - 1 - index; i++)
-	{
-		data[index] = arr[i];
-		CombinationUtil(arr, data, i + 1, index + 1, r, subset);
-	}
->>>>>>> c1f6b22468b5413173b0e8e3fa33c0e3e608d213
 
 }
 
@@ -62,7 +47,6 @@ std::pair<long long, vector<long long> > optimal_path(const Matrix& graph) {
 		Path[i][count].push_back(count);
 	}
 	//cout << endl;
-<<<<<<< HEAD
 	vector<long long>used;
 	for (long long i = 0; i < graph.size(); i++) {
 		used.push_back(i);
@@ -71,16 +55,6 @@ std::pair<long long, vector<long long> > optimal_path(const Matrix& graph) {
 
 		vector<long long>data(s, 0);
 		vector<vector<long long>>subset;
-=======
-	vector<long long>used;
-	for (long long i = 0; i < graph.size(); i++) {
-		used.push_back(i);
-	}
-	for (long long s = 2; s <= graph.size(); s++) {
-
-		vector<long long>data(s, 0);
-		vector<vector<long long>>subset;
->>>>>>> c1f6b22468b5413173b0e8e3fa33c0e3e608d213
 		CombinationUtil(used, data, 0, 0, s, subset);
 
 		for (long long k = 0; k < subset.size(); k++) {
